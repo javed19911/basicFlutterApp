@@ -3,31 +3,31 @@ import 'package:flutter/cupertino.dart';
 import '../../DataManager.dart';
 
 abstract class PreferencesHelper {
-  Future<String> getHostURL();
+  Future<String?> getHostURL();
 
   Future<bool> setHostURL(String hostURL);
 
-  Future<String> getAccessToken();
+  Future<String?> getAccessToken();
 
   Future<bool> setAccessToken(String accessToken);
 
-  Future<String> getFirebaseToken();
+  Future<String?> getFirebaseToken();
 
   Future<bool> setFirebaseToken(String firebaseToken);
 
-  Future<String> getCurrentUserEmail();
+  Future<String?> getCurrentUserEmail();
 
   Future<bool> setCurrentUserEmail(String email);
 
-  Future<String> getPassword();
+  Future<String?> getPassword();
 
   Future<bool> setPassword(String password);
 
-  Future<bool> isRememberCredentials();
+  Future<bool?> isRememberCredentials();
 
   Future<bool> setRememberCredentials(bool rememberCredentials);
 
-  Future<int> getCurrentUserId();
+  Future<int?> getCurrentUserId();
 
   Future<bool> setCurrentUserId(int userId);
 
@@ -35,21 +35,21 @@ abstract class PreferencesHelper {
 
   Future<bool> setCurrentUserLoggedInMode(LoggedInMode mode);
 
-  Future<String> getCurrentUserName();
+  Future<String?> getCurrentUserName();
 
   Future<bool> setCurrentUserName(String userName);
 
-  Future<String> getCurrentUserProfilePicUrl();
+  Future<String?> getCurrentUserProfilePicUrl();
 
   Future<bool> setCurrentUserProfilePicUrl(String profilePicUrl);
 
-  Future<String> getCurrentUserMobileNo();
+  Future<String?> getCurrentUserMobileNo();
 
-  Future<bool> setCurrentUserMobileNo(String mobile_no);
+  Future<bool> setCurrentUserMobileNo(String? mobile_no);
 
-  Future<String> getCurrentUserRole();
+  Future<String?> getCurrentUserRole();
 
-  Future<bool> setCurrentUserRole(String role);
+  Future<bool> setCurrentUserRole(String? role);
 
   Future<LoggedInPlatform> getCurrentUserLoggedInPlatform();
 

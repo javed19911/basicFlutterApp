@@ -1,12 +1,12 @@
-import 'package:intello_track_image_upload_app/data/models/CommodityResponse.dart';
-import 'package:intello_track_image_upload_app/data/models/LotResponse.dart';
-import 'package:intello_track_image_upload_app/data/models/default_response.dart';
-import 'package:intello_track_image_upload_app/data/models/otp_reponse.dart';
+import '../models/CommodityResponse.dart';
+import '../models/LotResponse.dart';
+import '../models/default_response.dart';
+import '../models/otp_reponse.dart';
 
 abstract class ApiHelper {
   Future<DefaultResponse> generateOTP(String phone_number);
 
-  Future<OTP_Reponse> validateOTP(String phone_number, String OTP);
+  Future<OTP_Reponse> validateOTP(String phoneNumber, String OTP);
 
   Future<OTP_Reponse> validateUser(String email, String password);
 

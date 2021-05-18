@@ -5,10 +5,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:intello_track_image_upload_app/multiLanguage/lanuages/language.dart';
-import 'package:intello_track_image_upload_app/ui/base/BaseActivity.dart';
-import 'package:intello_track_image_upload_app/ui/login/vmLogin.dart';
-import 'package:intello_track_image_upload_app/utils/progessDialog.dart';
+import '../../multiLanguage/lanuages/language.dart';
+import '../../ui/base/BaseActivity.dart';
+import '../../ui/login/vmLogin.dart';
+import '../../utils/progessDialog.dart';
 
 import '../../main.dart';
 import 'iLogin.dart';
@@ -27,7 +27,7 @@ class LoginActivity extends StatefulWidget {
 
 class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
     implements iLogin {
-  vmLogin view_model;
+  vmLogin? view_model;
   var progress;
 
   final TextEditingController _usernameController = TextEditingController();
@@ -45,7 +45,7 @@ class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
   }
 
   @override
-  Widget getWidget(BuildContext buildContext, vmLogin vm) {
+  Widget getWidget(BuildContext buildContext, vmLogin? vm) {
     this.view_model = vm;
     //vm.checkIfAlreadyLoggedIn();
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
@@ -112,8 +112,8 @@ class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
                                 color: HexColor.fromHex("#2A654E"),
                                 textColor: Colors.white,
                                 onPressed: () {
-                                  if (!vm.mIsLoading) {
-                                    vm.validateUser(
+                                  if (vm?.mIsLoading != true) {
+                                    vm?.validateUser(
                                         buildContext,
                                         _usernameController.text,
                                         _passwordController.text);
@@ -128,14 +128,16 @@ class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
                     ]),
                   )),
               Center(
-                child: vm.mIsLoading ? new CircularProgressIndicator() : null,
+                child: vm?.mIsLoading == true
+                    ? new CircularProgressIndicator()
+                    : null,
               )
             ],
           ));
     }));
   }
 
-  String checkEmptyValidation(value) {
+  String? checkEmptyValidation(value) {
     if (value.isEmpty) {
       return Language.of(context).requiredWarningText;
     }

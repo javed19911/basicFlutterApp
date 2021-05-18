@@ -2,21 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intello_track_image_upload_app/data/DataManager.dart';
-import 'package:intello_track_image_upload_app/ui/base/BaseViewModel.dart';
+import '../../data/DataManager.dart';
+import '../../ui/base/BaseViewModel.dart';
 
 import 'iLogin.dart';
 
 class vmLogin extends BaseViewModel<iLogin> {
-  String phoneNumber;
+  late String phoneNumber;
 
   void checkIfAlreadyLoggedIn() {
     dataManager.isRememberCredentials().then((value) {
       if (value != null && value) {
-        if (navigator != null) {
-          navigator.openHomeActivity();
-          //notifyListeners();
-        }
+        navigator?.openHomeActivity();
       }
     });
   }
@@ -95,7 +92,7 @@ class vmLogin extends BaseViewModel<iLogin> {
         phoneNumber = phone_number;
         validateOTP(context, otp);
       } else {
-        throw Exception(response.error.errorMessage);
+        throw Exception(response.error?.errorMessage);
       }
     }).catchError((e) {
       print("Got error: ${e.toString()}");
@@ -125,27 +122,25 @@ class vmLogin extends BaseViewModel<iLogin> {
     dataManager.validateOTP(phoneNumber, otp).then((response) {
       if (response.success) {
         dataManager.setRememberCredentials(true);
-        dataManager.setCurrentUserId(response.user.id);
-        dataManager.setCurrentUserName(response.user.email);
-        dataManager.setAccessToken(response.user.authenticationToken);
+        dataManager.setCurrentUserId(response.user!.id!);
+        dataManager.setCurrentUserName(response.user!.email!);
+        dataManager.setAccessToken(response.user!.authenticationToken!);
         dataManager
             .setCurrentUserLoggedInMode(LoggedInMode.LOGGED_IN_MODE_SERVER);
-        if (response.user.userType.toLowerCase() == "auction") {
+        if (response.user!.userType!.toLowerCase() == "auction") {
           dataManager.setCurrentUserLoggedInPlatform(
               LoggedInPlatform.LOGGED_IN_PLATFORM_AUCTIONER);
         } else {
           dataManager.setCurrentUserLoggedInPlatform(
               LoggedInPlatform.LOGGED_IN_PLATFORM_TRADER);
         }
-        dataManager.setCurrentUserEmail(response.user.email);
-        dataManager.setCurrentUserMobileNo(response.user.phoneNumber);
-        dataManager.setCurrentUserRole(response.user.userType);
+        dataManager.setCurrentUserEmail(response.user!.email!);
+        dataManager.setCurrentUserMobileNo(response.user?.phoneNumber);
+        dataManager.setCurrentUserRole(response.user?.userType);
 
-        if (navigator != null) {
-          navigator.openHomeActivity();
-        }
+        navigator?.openHomeActivity();
       } else {
-        throw Exception(response.error.errorMessage);
+        throw Exception(response.error?.errorMessage);
       }
     }).catchError((e) {
       print("Got error: ${e.toString()}");

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intello_track_image_upload_app/ui/login/loginActivity.dart';
-import 'package:intello_track_image_upload_app/ui/login/vmLogin.dart';
+import './ui/login/loginActivity.dart';
+import './ui/login/vmLogin.dart';
 import 'package:provider/provider.dart';
 
 class RouteGenerator {

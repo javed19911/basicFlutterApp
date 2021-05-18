@@ -1,12 +1,11 @@
-class ActivityResult<T>{
-
+class ActivityResult<T> {
   ActivityResultCode _code = ActivityResultCode.ACTIVITY_CANCEL;
-  T _result ;
+  late T _result;
 
   ActivityResult();
 
   ActivityResult.codeResult(this._code, this._result);
-  ActivityResult.Result( this._result);
+  ActivityResult.Result(this._result);
   ActivityResult.code(this._code);
 
   ActivityResultCode get code => _code;
@@ -22,7 +21,4 @@ class ActivityResult<T>{
   }
 }
 
-enum ActivityResultCode{
-  ACTIVITY_OK,
-  ACTIVITY_CANCEL
-}
+enum ActivityResultCode { ACTIVITY_OK, ACTIVITY_CANCEL }

@@ -7,8 +7,8 @@ class ProgressDialog extends StatelessWidget {
   String title;
   String description;
   List<Widget> actionWidget;
-  Widget extraContent;
-  BuildContext context;
+  Widget? extraContent;
+  late BuildContext context;
 
   ProgressDialog(
       {this.title = '',

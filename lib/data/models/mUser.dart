@@ -1,19 +1,19 @@
 class mUser {
-  int _id;
-  String _email;
-  String _authenticationToken;
-  String _phoneNumber;
-  String _userType;
+  int? _id;
+  String? _email;
+  String? _authenticationToken;
+  String? _phoneNumber;
+  String? _userType;
 
-  int get id => _id;
+  int? get id => _id;
 
-  String get email => _email;
+  String? get email => _email;
 
-  String get authenticationToken => _authenticationToken;
+  String? get authenticationToken => _authenticationToken;
 
-  String get phoneNumber => _phoneNumber;
+  String? get phoneNumber => _phoneNumber;
 
-  String get userType => _userType;
+  String? get userType => _userType;
 
   mUser.fromJson(Map<String, dynamic> json) {
     _id = json['id'];

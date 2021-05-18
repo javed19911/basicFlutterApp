@@ -1,10 +1,10 @@
 class Data {
-  String _name;
-  String _tag;
-  String _selectedImageUrl;
-  String _unselectedImageUrl;
-  bool _selected;
-  bool _multipleSelect;
+  late String _name;
+  late String _tag;
+  late String _selectedImageUrl;
+  late String _unselectedImageUrl;
+  late bool _selected;
+  late bool _multipleSelect;
 
   String get name => _name;
   String get tag => _tag;
@@ -16,12 +16,12 @@ class Data {
   set selected(bool value) => _selected = value;
 
   Data(
-      {String name,
-      String tag,
-      String selectedImageUrl,
-      String unselectedImageUrl,
-      bool selected,
-      bool multipleSelect}) {
+      {required String name,
+      required String tag,
+      required String selectedImageUrl,
+      required String unselectedImageUrl,
+      required bool selected,
+      required bool multipleSelect}) {
     _name = name;
     _tag = tag;
     _selectedImageUrl = selectedImageUrl;

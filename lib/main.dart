@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intello_track_image_upload_app/res/string/Strings.dart';
-import 'package:intello_track_image_upload_app/route_generator.dart';
 
 import 'data/AppDataManager.dart';
 import 'multiLanguage/localization_delegate.dart';
+import 'res/string/Strings.dart';
+import 'route_generator.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 
   static void setLocale(BuildContext context, Locale newLocale) {
     var state = context.findAncestorStateOfType<_MyAppState>();
-    state.setLocale(newLocale);
+    state?.setLocale(newLocale);
   }
 
   @override
@@ -24,7 +24,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale;
+  Locale? _locale;
   AppDataManager _dataManager = AppDataManager();
   void setLocale(Locale locale) {
     setState(() {
@@ -68,11 +68,11 @@ class _MyAppState extends State<MyApp> {
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
-          if (supportedLocale?.languageCode == locale?.languageCode) {
+          if (supportedLocale.languageCode == locale?.languageCode) {
             return supportedLocale;
           }
         }
-        return supportedLocales?.first;
+        return supportedLocales.first;
       },
     );
   }

@@ -2,9 +2,9 @@ import 'default_response.dart';
 import 'mFilters.dart';
 
 class GetFilterResponse extends DefaultResponse {
-  List<Filters> _filters;
+  List<Filters>? _filters;
 
-  List<Filters> get filters => _filters;
+  List<Filters>? get filters => _filters;
 
   GetFilterResponse();
 
@@ -12,7 +12,7 @@ class GetFilterResponse extends DefaultResponse {
     if (json["filters"] != null) {
       _filters = [];
       json["filters"].forEach((v) {
-        _filters.add(Filters.fromJson(v));
+        _filters?.add(Filters.fromJson(v));
       });
     }
   }
@@ -20,7 +20,7 @@ class GetFilterResponse extends DefaultResponse {
   Map<String, dynamic> toJson() {
     var map = super.toJson();
     if (_filters != null) {
-      map["filters"] = _filters.map((v) => v.toJson()).toList();
+      map["filters"] = _filters?.map((v) => v.toJson()).toList();
     }
     return map;
   }
@@ -28,7 +28,7 @@ class GetFilterResponse extends DefaultResponse {
   Map<String, List> getFilterQuery() {
     var map = Map<String, List>();
     if (_filters != null) {
-      _filters.forEach((filter) {
+      _filters?.forEach((filter) {
         var query = [];
         filter.data.forEach((data) {
           if (data.selected) {

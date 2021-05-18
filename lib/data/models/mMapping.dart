@@ -1,13 +1,14 @@
 import 'mContourDetails.dart';
 
 class Mapping {
-  String _name;
-  List<ContourDetails> _contourDetails;
+  late String _name;
+  late List<ContourDetails> _contourDetails;
 
   String get name => _name;
   List<ContourDetails> get contourDetails => _contourDetails;
 
-  Mapping({String name, List<ContourDetails> contourDetails}) {
+  Mapping(
+      {required String name, required List<ContourDetails> contourDetails}) {
     _name = name;
     _contourDetails = contourDetails;
   }

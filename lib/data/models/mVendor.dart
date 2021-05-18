@@ -1,8 +1,8 @@
 class mVendor {
-  int id;
-  String name;
+  late int id;
+  late String name;
 
-  mVendor({this.id, this.name});
+  mVendor({required this.id, required this.name});
 
   mVendor.fromJson(Map<String, dynamic> json) {
     id = json['id'];

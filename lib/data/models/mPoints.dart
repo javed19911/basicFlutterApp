@@ -1,69 +1,69 @@
 class Points {
-  String _shape;
-  double _x2;
-  double _y2;
-  double _radius;
-  double _centerX;
-  double _centerY;
-  double _endAngle;
-  double _majorAxis;
-  double _minorAxis;
-  double _startAngle;
-  bool _fromMachine;
-  double _rotationAngle;
-  double _rotateByAngle;
+  String? _shape;
+  double? _x2;
+  double? _y2;
+  double? _radius;
+  double? _centerX;
+  double? _centerY;
+  double? _endAngle;
+  double? _majorAxis;
+  double? _minorAxis;
+  double? _startAngle;
+  bool? _fromMachine;
+  double? _rotationAngle;
+  double? _rotateByAngle;
 
-  String get shape => _shape;
+  String? get shape => _shape;
 
-  set shape(String shape) => _shape = shape;
+  set shape(String? shape) => _shape = shape;
 
-  double get x2 => _x2;
+  double? get x2 => _x2;
 
-  set x2(double x2) => _x2 = x2;
+  set x2(double? x2) => _x2 = x2;
 
-  double get y2 => _y2;
+  double? get y2 => _y2;
 
-  set y2(double y2) => _y2 = y2;
+  set y2(double? y2) => _y2 = y2;
 
-  double get radius => _radius;
+  double? get radius => _radius;
 
-  set radius(double radius) => _radius = radius;
+  set radius(double? radius) => _radius = radius;
 
-  double get centerX => _centerX;
+  double? get centerX => _centerX;
 
-  set centerX(double centerX) => _centerX = centerX;
+  set centerX(double? centerX) => _centerX = centerX;
 
-  double get centerY => _centerY;
+  double? get centerY => _centerY;
 
-  set centerY(double centerY) => _centerY = centerY;
+  set centerY(double? centerY) => _centerY = centerY;
 
-  double get endAngle => _endAngle;
+  double? get endAngle => _endAngle;
 
-  set endAngle(double endAngle) => _endAngle = endAngle;
+  set endAngle(double? endAngle) => _endAngle = endAngle;
 
-  double get majorAxis => _majorAxis;
+  double? get majorAxis => _majorAxis;
 
-  set majorAxis(double majorAxis) => _majorAxis = majorAxis;
+  set majorAxis(double? majorAxis) => _majorAxis = majorAxis;
 
-  double get minorAxis => _minorAxis;
+  double? get minorAxis => _minorAxis;
 
-  set minorAxis(double minorAxis) => _minorAxis = minorAxis;
+  set minorAxis(double? minorAxis) => _minorAxis = minorAxis;
 
-  double get startAngle => _startAngle;
+  double? get startAngle => _startAngle;
 
-  set startAngle(double startAngle) => _startAngle = startAngle;
+  set startAngle(double? startAngle) => _startAngle = startAngle;
 
-  bool get fromMachine => _fromMachine;
+  bool? get fromMachine => _fromMachine;
 
-  set fromMachine(bool fromMachine) => _fromMachine = fromMachine;
+  set fromMachine(bool? fromMachine) => _fromMachine = fromMachine;
 
-  double get rotationAngle => _rotationAngle;
+  double? get rotationAngle => _rotationAngle;
 
-  set rotationAngle(double rotationAngle) => _rotationAngle = rotationAngle;
+  set rotationAngle(double? rotationAngle) => _rotationAngle = rotationAngle;
 
-  double get rotateByAngle => _rotateByAngle;
+  double? get rotateByAngle => _rotateByAngle;
 
-  set rotateByAngle(double rotateByAngle) => _rotateByAngle = rotateByAngle;
+  set rotateByAngle(double? rotateByAngle) => _rotateByAngle = rotateByAngle;
 
   Points.fromJson(Map<String, dynamic> json) {
     _shape = json['shape'];

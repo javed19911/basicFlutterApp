@@ -44,76 +44,76 @@ class AppPreferencesHelper implements PreferencesHelper {
 
   static final String PREF_KEY_SELECTED_LANGUAGE = "PREF_KEY_SELECTED_LANGUAGE";
 
-  SharedPreferences mPrefs;
+  late SharedPreferences mPrefs;
 
   AppPreferencesHelper() {
     SharedPreferences.getInstance().then((prefs) => this.mPrefs = prefs);
   }
 
   @override
-  Future<String> getHostURL() async {
+  Future<String?> getHostURL() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getString(PREF_KEY_HOST_URL);
   }
 
   @override
-  Future<String> getAccessToken() async {
+  Future<String?> getAccessToken() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getString(PREF_KEY_ACCESS_TOKEN);
   }
 
   @override
-  Future<String> getCurrentUserEmail() async {
+  Future<String?> getCurrentUserEmail() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getString(PREF_KEY_CURRENT_USER_EMAIL);
   }
 
   @override
-  Future<int> getCurrentUserId() async {
+  Future<int?> getCurrentUserId() async {
     return mPrefs.getInt(PREF_KEY_CURRENT_USER_ID);
   }
 
   @override
   Future<LoggedInMode> getCurrentUserLoggedInMode() async {
     return LoggedInMode
-        .values[await mPrefs.getInt(PREF_KEY_USER_LOGGED_IN_MODE)];
+        .values[await mPrefs.getInt(PREF_KEY_USER_LOGGED_IN_MODE) ?? 0];
   }
 
   @override
-  Future<String> getCurrentUserName() async {
+  Future<String?> getCurrentUserName() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getString(PREF_KEY_CURRENT_USER_NAME);
   }
 
   @override
-  Future<String> getCurrentUserProfilePicUrl() async {
+  Future<String?> getCurrentUserProfilePicUrl() async {
     return mPrefs.getString(PREF_KEY_CURRENT_USER_PROFILE_PIC_URL);
   }
 
   @override
-  Future<String> getFirebaseToken() async {
+  Future<String?> getFirebaseToken() async {
     return mPrefs.getString(PREF_KEY_FIREBASE_TOKEN);
   }
 
   @override
-  Future<String> getPassword() async {
+  Future<String?> getPassword() async {
     return mPrefs.getString(PREF_KEY_USER_PASSWORD);
   }
 
   @override
-  Future<bool> isRememberCredentials() async {
+  Future<bool?> isRememberCredentials() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getBool(PREF_KEY_REMEMBER_CREDENTIALS);
   }
 
   @override
-  Future<String> getCurrentUserMobileNo() async {
+  Future<String?> getCurrentUserMobileNo() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getString(PREF_KEY_CURRENT_USER_MOBILE);
   }
 
   @override
-  Future<String> getCurrentUserRole() async {
+  Future<String?> getCurrentUserRole() async {
     mPrefs = await SharedPreferences.getInstance();
     return mPrefs.getString(PREF_KEY_CURRENT_USER_ROLE);
   }
@@ -171,15 +171,15 @@ class AppPreferencesHelper implements PreferencesHelper {
   }
 
   @override
-  Future<bool> setCurrentUserRole(String role) async {
+  Future<bool> setCurrentUserRole(String? role) async {
     mPrefs = await SharedPreferences.getInstance();
-    return mPrefs.setString(PREF_KEY_CURRENT_USER_ROLE, role);
+    return mPrefs.setString(PREF_KEY_CURRENT_USER_ROLE, role ?? "");
   }
 
   @override
-  Future<bool> setCurrentUserMobileNo(String mobile_no) async {
+  Future<bool> setCurrentUserMobileNo(String? mobile_no) async {
     mPrefs = await SharedPreferences.getInstance();
-    return mPrefs.setString(PREF_KEY_CURRENT_USER_MOBILE, mobile_no);
+    return mPrefs.setString(PREF_KEY_CURRENT_USER_MOBILE, mobile_no ?? "");
   }
 
   @override
@@ -187,7 +187,7 @@ class AppPreferencesHelper implements PreferencesHelper {
     mPrefs = await SharedPreferences.getInstance();
     //return mPrefs.setString(PREF_KEY_CURRENT_USER_PLATFORM, role);
     return LoggedInPlatform
-        .values[await mPrefs.getInt(PREF_KEY_CURRENT_USER_PLATFORM)];
+        .values[await mPrefs.getInt(PREF_KEY_CURRENT_USER_PLATFORM) ?? 0];
   }
 
   @override

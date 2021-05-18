@@ -1,37 +1,37 @@
 import 'mVariety.dart';
 
 class mCommodity {
-  int _id;
-  String _name;
-  String _thumbnail;
-  List<mVariety> _varieties;
-  List<String> _sizes;
+  int? _id;
+  String? _name;
+  String? _thumbnail;
+  List<mVariety>? _varieties;
+  List<String>? _sizes;
 
   mCommodity();
 
-  int get id => _id;
-  String get name => _name;
-  String get thumbnail => _thumbnail;
-  List<mVariety> get varieties => _varieties;
-  List<String> get sizes => _sizes;
+  int? get id => _id;
+  String? get name => _name;
+  String? get thumbnail => _thumbnail;
+  List<mVariety>? get varieties => _varieties;
+  List<String>? get sizes => _sizes;
 
-  set id(int value) {
+  set id(int? value) {
     _id = value;
   }
 
-  set name(String value) {
+  set name(String? value) {
     _name = value;
   }
 
-  set thumbnail(String value) {
+  set thumbnail(String? value) {
     _thumbnail = value;
   }
 
-  set varieties(List<mVariety> value) {
+  set varieties(List<mVariety>? value) {
     _varieties = value;
   }
 
-  set sizes(List<String> value) {
+  set sizes(List<String>? value) {
     _sizes = value;
   }
 
@@ -40,11 +40,11 @@ class mCommodity {
     _name = json["name"];
     _thumbnail = json["thumbnail"];
 
-    if (_thumbnail == null || _thumbnail.isEmpty) {
-      if (_name.toLowerCase().contains("onion")) {
+    if (_thumbnail == null || _thumbnail!.isEmpty) {
+      if (_name!.toLowerCase().contains("onion")) {
         _thumbnail =
             "https://pramanapp.s3.ap-south-1.amazonaws.com/images/onions_creation.png";
-      } else if (_name.toLowerCase().contains("potato")) {
+      } else if (_name!.toLowerCase().contains("potato")) {
         _thumbnail =
             "https://pramanapp.s3.ap-south-1.amazonaws.com/images/potato_creation.png";
       } else {
@@ -55,7 +55,7 @@ class mCommodity {
     _varieties = [];
     if (json["varieties"] != null) {
       json["varieties"].forEach((v) {
-        _varieties.add(mVariety.fromJson(v));
+        _varieties?.add(mVariety.fromJson(v));
       });
     }
 

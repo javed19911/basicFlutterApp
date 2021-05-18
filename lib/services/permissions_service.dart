@@ -19,47 +19,47 @@ class PermissionsService {
 
   /// Requests the users permission to read their location when the app is in use
   void requestLocationPermission(
-      {Function onPermissionDenied, Function onPermissionGranted}) async {
+      {Function? onPermissionDenied, Function? onPermissionGranted}) async {
     var grantedLocation = await _requestPermission(Permission.location);
     if (!grantedLocation) {
-      onPermissionDenied();
+      onPermissionDenied!();
     } else {
-      onPermissionGranted();
+      onPermissionGranted!();
     }
   }
 
   /// Requests the users permission to use Camera.
   void requestCameraPermission(
-      {Function onPermissionDenied, Function onPermissionGranted}) async {
+      {Function? onPermissionDenied, Function? onPermissionGranted}) async {
     var granted = await _requestPermission(Permission.camera);
     if (!granted) {
-      onPermissionDenied();
+      onPermissionDenied!();
     } else {
-      onPermissionGranted();
+      onPermissionGranted!();
     }
     //return granted;
   }
 
   /// Requests the users permission to use Read Write Storage.
   void requestStoragePermission(
-      {Function onPermissionDenied, Function onPermissionGranted}) async {
+      {Function? onPermissionDenied, Function? onPermissionGranted}) async {
     var granted = await _requestPermission(Permission.storage);
     if (!granted) {
-      onPermissionDenied();
+      onPermissionDenied!();
     } else {
-      onPermissionGranted();
+      onPermissionGranted!();
     }
     //return granted;
   }
 
   /// Requests the users permission to use Read Write Storage.
   void requestPhotoPermission(
-      {Function onPermissionDenied, Function onPermissionGranted}) async {
+      {Function? onPermissionDenied, Function? onPermissionGranted}) async {
     var granted = await _requestPermission(Permission.photos);
     if (!granted) {
-      onPermissionDenied();
+      onPermissionDenied!();
     } else {
-      onPermissionGranted();
+      onPermissionGranted!();
     }
     //return granted;
   }

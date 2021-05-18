@@ -3,12 +3,12 @@ import 'dart:ui';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
-import 'package:intello_track_image_upload_app/data/local/prefs/AppPreferencesHelper.dart';
-import 'package:intello_track_image_upload_app/data/models/CommodityResponse.dart';
-import 'package:intello_track_image_upload_app/data/models/LotResponse.dart';
-import 'package:intello_track_image_upload_app/data/models/default_response.dart';
-import 'package:intello_track_image_upload_app/data/models/otp_reponse.dart';
-import 'package:intello_track_image_upload_app/utils/UtilFunctions.dart';
+import '../../utils/UtilFunctions.dart';
+import '../local/prefs/AppPreferencesHelper.dart';
+import '../models/CommodityResponse.dart';
+import '../models/LotResponse.dart';
+import '../models/default_response.dart';
+import '../models/otp_reponse.dart';
 
 import 'ApiHelper.dart';
 
@@ -61,7 +61,8 @@ class Webservice implements ApiHelper {
 
     String body = json.encode(data);
 
-    final response = await http.post(BASE_URL + "users/login_with_otp",
+    final response = await http.post(
+        Uri.parse(BASE_URL + "users/login_with_otp"),
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
@@ -91,14 +92,15 @@ class Webservice implements ApiHelper {
 
     String body = json.encode(data);
 
-    final response = await http.post("${BASE_URL}v1/users/generate_otp",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '*'
-        },
-        body: body);
+    final response =
+        await http.post(Uri.parse("${BASE_URL}v1/users/generate_otp"),
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': '*'
+            },
+            body: body);
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
@@ -123,7 +125,8 @@ class Webservice implements ApiHelper {
 
     String body = json.encode(data);
 
-    final response = await http.post(BASE_URL + "v1/users/login_with_otp",
+    final response = await http.post(
+        Uri.parse(BASE_URL + "v1/users/login_with_otp"),
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
@@ -159,7 +162,8 @@ class Webservice implements ApiHelper {
 
     String body = json.encode(data);
 
-    final response = await http.post(BASE_URL + "v2/inspections/index",
+    final response = await http.post(
+        Uri.parse(BASE_URL + "v2/inspections/index"),
         /*final response = await http.post(
         "http://trade.praman.ai/api/v23/lots/index",*/
         headers: await getHeader(),
@@ -187,7 +191,8 @@ class Webservice implements ApiHelper {
 
     String body = json.encode(data);
 
-    final response = await http.post(BASE_URL + "v2/inspections/commodities",
+    final response = await http.post(
+        Uri.parse(BASE_URL + "v2/inspections/commodities"),
         /* final response = await http.post(
         "http://3.7.230.206:4000/api/pfg_test/inspections/commodities",*/
         headers: await getHeader(),
@@ -236,7 +241,8 @@ class Webservice implements ApiHelper {
 
     final response = await http
         //.post(BASE_URL + "lots/gradings/classify_vegetable", body: body);
-        .post("15.206.220.141:4000/api/v1/inspections/save_image", body: body);
+        .post(Uri.parse("15.206.220.141:4000/api/v1/inspections/save_image"),
+            body: body);
 
     if (response.statusCode == 200) {
       final jsonBody = jsonDecode(response.body);

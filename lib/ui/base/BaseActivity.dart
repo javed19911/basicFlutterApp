@@ -7,14 +7,14 @@ import 'BaseViewModel.dart';
 
 abstract class BaseActivity<S extends StatefulWidget, VM extends BaseViewModel>
     extends State<S> with WidgetsBindingObserver {
-  VM _view_model;
+  VM? _view_model;
 
   int _create_count = 0;
   bool isCreated = false;
 
-  Widget getWidget(BuildContext context, VM view_model);
+  Widget getWidget(BuildContext context, VM? view_model);
 
-  VM getViewModel() {
+  VM? getViewModel() {
     try {
       _view_model = Provider.of<VM>(context);
     } catch (e) {
@@ -27,12 +27,12 @@ abstract class BaseActivity<S extends StatefulWidget, VM extends BaseViewModel>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
 
@@ -145,11 +145,11 @@ abstract class BaseActivity<S extends StatefulWidget, VM extends BaseViewModel>
     );
   }
 
-  void startNamedActivity(String page, {Object args}) {
+  void startNamedActivity(String page, {Object? args}) {
     Navigator.pushNamed(context, page, arguments: args);
   }
 
-  void replaceNamedActivity(String page, {Object args}) {
+  void replaceNamedActivity(String page, {Object? args}) {
     Navigator.pushReplacementNamed(context, page, arguments: args);
   }
 
@@ -170,7 +170,7 @@ abstract class BaseActivity<S extends StatefulWidget, VM extends BaseViewModel>
   }
 
   void startNamedActivityforResult(String page, int result_code,
-      {Object args}) {
+      {Object? args}) {
     Navigator.pushNamed(context, page, arguments: args).then((result) =>
         (result is ActivityResult)
             ? onActivityResult(result_code, result)

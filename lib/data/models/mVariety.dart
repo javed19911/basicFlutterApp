@@ -1,27 +1,27 @@
 class mVariety {
   int _id = 0;
-  int _product_id;
+  int? _product_id;
   String _name = "";
-  String _barcode;
-  String _code;
-  int _min_image_count;
-  int _max_image_count;
+  String? _barcode;
+  String? _code;
+  int? _min_image_count;
+  int? _max_image_count;
 
   mVariety();
 
   int get id => _id;
-  int get product_id => _product_id;
+  int? get product_id => _product_id;
   String get name => _name;
-  String get barcode => _barcode;
-  String get code => _code;
-  int get min_image_count => _min_image_count;
-  int get max_image_count => _max_image_count;
+  String? get barcode => _barcode;
+  String? get code => _code;
+  int? get min_image_count => _min_image_count;
+  int? get max_image_count => _max_image_count;
 
   set id(int value) {
     _id = value;
   }
 
-  set product_id(int value) {
+  set product_id(int? value) {
     _product_id = value;
   }
 
@@ -29,19 +29,19 @@ class mVariety {
     _name = value;
   }
 
-  set barcode(String value) {
+  set barcode(String? value) {
     _barcode = value;
   }
 
-  set code(String value) {
+  set code(String? value) {
     _code = value;
   }
 
-  set min_image_count(int value) {
+  set min_image_count(int? value) {
     _min_image_count = value;
   }
 
-  set max_image_count(int value) {
+  set max_image_count(int? value) {
     _max_image_count = value;
   }
 

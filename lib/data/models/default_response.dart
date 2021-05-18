@@ -1,13 +1,13 @@
 class DefaultResponse {
-  bool _success;
-  Error _error;
-  String _message;
-  String _title;
+  bool _success = false;
+  Error? _error;
+  String? _message;
+  String? _title;
 
   bool get success => _success;
-  Error get error => _error;
-  String get message => _message;
-  String get title => _title;
+  Error? get error => _error;
+  String? get message => _message;
+  String? get title => _title;
 
   DefaultResponse();
 
@@ -27,21 +27,21 @@ class DefaultResponse {
     map["success"] = _success;
     map["message"] = _message;
     map["title"] = _title;
-    map["error"] = _error.toJson();
+    map["error"] = _error?.toJson();
     return map;
   }
 }
 
 class Error {
-  int _code;
-  String _errorMessage;
-  String _type;
+  int? _code;
+  String? _errorMessage;
+  String? _type;
 
   Error();
 
-  int get code => _code;
-  String get errorMessage => _errorMessage;
-  String get type => _type;
+  int? get code => _code;
+  String? get errorMessage => _errorMessage;
+  String? get type => _type;
 
   Error.fromJson(dynamic json) {
     _code = json["code"];

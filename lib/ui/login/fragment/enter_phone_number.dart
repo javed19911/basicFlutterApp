@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intello_track_image_upload_app/res/string/Strings.dart';
-import 'package:intello_track_image_upload_app/ui/base/BaseActivity.dart';
+import 'package:UControl/res/string/Strings.dart';
+import 'package:UControl/ui/base/BaseActivity.dart';
 
 import '../vmLogin.dart';
 
@@ -15,7 +15,7 @@ class _enterPhoneNumberPage extends BaseActivity<EnterPhoneNumber, vmLogin> {
   final TextEditingController _phone_controller = TextEditingController();
 
   @override
-  Widget getWidget(BuildContext context, vmLogin view_model) {
+  Widget getWidget(BuildContext context, vmLogin? view_model) {
     return Column(children: <Widget>[
       Expanded(
         child: Stack(

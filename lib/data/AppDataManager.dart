@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import 'package:intello_track_image_upload_app/data/remote/webservice.dart';
-
 import 'DataManager.dart';
 import 'local/prefs/AppPreferencesHelper.dart';
 import 'local/prefs/PreferencesHelper.dart';
@@ -11,11 +9,12 @@ import 'models/create_or_update_lot_response.dart';
 import 'models/default_response.dart';
 import 'models/filters_response.dart';
 import 'models/otp_reponse.dart';
+import 'remote/webservice.dart';
 
 class AppDataManager implements DataManager {
-  Webservice webservice;
+  late Webservice webservice;
 
-  PreferencesHelper mPreferencesHelper;
+  late PreferencesHelper mPreferencesHelper;
 
   AppDataManager() {
     mPreferencesHelper = AppPreferencesHelper();
@@ -29,22 +28,22 @@ class AppDataManager implements DataManager {
   }
 
   @override
-  Future<String> getHostURL() {
+  Future<String?> getHostURL() {
     return mPreferencesHelper.getHostURL();
   }
 
   @override
-  Future<String> getAccessToken() {
+  Future<String?> getAccessToken() {
     return mPreferencesHelper.getAccessToken();
   }
 
   @override
-  Future<String> getCurrentUserEmail() {
+  Future<String?> getCurrentUserEmail() {
     return mPreferencesHelper.getCurrentUserEmail();
   }
 
   @override
-  Future<int> getCurrentUserId() {
+  Future<int?> getCurrentUserId() {
     return mPreferencesHelper.getCurrentUserId();
   }
 
@@ -54,27 +53,27 @@ class AppDataManager implements DataManager {
   }
 
   @override
-  Future<String> getCurrentUserName() {
+  Future<String?> getCurrentUserName() {
     return mPreferencesHelper.getCurrentUserName();
   }
 
   @override
-  Future<String> getCurrentUserProfilePicUrl() {
+  Future<String?> getCurrentUserProfilePicUrl() {
     return mPreferencesHelper.getCurrentUserProfilePicUrl();
   }
 
   @override
-  Future<String> getFirebaseToken() {
+  Future<String?> getFirebaseToken() {
     return mPreferencesHelper.getFirebaseToken();
   }
 
   @override
-  Future<String> getPassword() {
+  Future<String?> getPassword() {
     return mPreferencesHelper.getPassword();
   }
 
   @override
-  Future<bool> isRememberCredentials() {
+  Future<bool?> isRememberCredentials() {
     return mPreferencesHelper.isRememberCredentials();
   }
 
@@ -129,22 +128,22 @@ class AppDataManager implements DataManager {
   }
 
   @override
-  Future<String> getCurrentUserMobileNo() {
+  Future<String?> getCurrentUserMobileNo() {
     return mPreferencesHelper.getCurrentUserMobileNo();
   }
 
   @override
-  Future<String> getCurrentUserRole() {
+  Future<String?> getCurrentUserRole() {
     return mPreferencesHelper.getCurrentUserRole();
   }
 
   @override
-  Future<bool> setCurrentUserMobileNo(String mobile_no) {
+  Future<bool> setCurrentUserMobileNo(String? mobile_no) {
     return mPreferencesHelper.setCurrentUserMobileNo(mobile_no);
   }
 
   @override
-  Future<bool> setCurrentUserRole(String role) {
+  Future<bool> setCurrentUserRole(String? role) {
     return mPreferencesHelper.setCurrentUserRole(role);
   }
 

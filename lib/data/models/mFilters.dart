@@ -1,13 +1,13 @@
 import 'mData.dart';
 
 class Filters {
-  String _name;
-  List<Data> _data;
+  late String _name;
+  late List<Data> _data;
 
   String get name => _name;
   List<Data> get data => _data;
 
-  Filters({String name, List<Data> data}) {
+  Filters({required String name, required List<Data> data}) {
     _name = name;
     _data = data;
   }

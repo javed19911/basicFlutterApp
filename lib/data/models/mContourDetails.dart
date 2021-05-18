@@ -1,15 +1,15 @@
 import 'mPoints.dart';
 
 class ContourDetails {
-  String _name;
-  int _value;
-  String _color;
-  int _priority;
-  bool _isDefault;
-  String _contourColor;
-  int _pointsCount;
-  double _percentage;
-  List<Points> _points;
+  late String _name;
+  late int _value;
+  late String _color;
+  late int _priority;
+  late bool _isDefault;
+  late String _contourColor;
+  late int _pointsCount;
+  late double _percentage;
+  late List<Points> _points;
 
   String get name => _name;
   int get value => _value;
@@ -22,14 +22,14 @@ class ContourDetails {
   List<Points> get points => _points;
 
   ContourDetails(
-      {String name,
-      int value,
-      String color,
-      int priority,
-      String contourColor,
-      int pointsCount,
-      double percentage,
-      List<Points> points}) {
+      {required String name,
+      required int value,
+      required String color,
+      required int priority,
+      required String contourColor,
+      required int pointsCount,
+      required double percentage,
+      required List<Points> points}) {
     _name = name;
     _value = value;
     _color = color;

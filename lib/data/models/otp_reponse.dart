@@ -9,7 +9,7 @@ import 'mUser.dart';
 /// role : "trader"
 
 class OTP_Reponse extends DefaultResponse {
-  mUser _user;
+  mUser? _user;
 
   // int _id;
   // String _mobileNumber;
@@ -27,7 +27,7 @@ class OTP_Reponse extends DefaultResponse {
   // String get username => _username;
   // String get platform_type => _platform_type;
 
-  mUser get user => _user;
+  mUser? get user => _user;
 
   OTP_Reponse.fromJson(dynamic json) : super.fromJson(json) {
     _user = mUser.fromJson(json["data"]);
@@ -43,7 +43,7 @@ class OTP_Reponse extends DefaultResponse {
 
   Map<String, dynamic> toJson() {
     var map = super.toJson();
-    map["data"] = _user.toJson();
+    map["data"] = _user?.toJson();
 
     // map["user_id"] = _id;
     // map["mobile_number"] = _mobileNumber;

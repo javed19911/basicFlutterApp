@@ -1,19 +1,19 @@
 class mInspectionResult {
-  int _id;
-  String _name;
-  String _color;
-  double _value;
-  String _comments;
+  int? _id;
+  String? _name;
+  String? _color;
+  double? _value;
+  String? _comments;
 
-  int get id => _id;
+  int? get id => _id;
 
-  String get name => _name;
+  String? get name => _name;
 
-  String get color => _color;
+  String? get color => _color;
 
-  double get value => _value;
+  double? get value => _value;
 
-  String get comments => _comments;
+  String? get comments => _comments;
 
   mInspectionResult.fromJson(Map<String, dynamic> json) {
     _id = json['id'];

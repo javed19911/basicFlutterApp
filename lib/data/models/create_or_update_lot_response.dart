@@ -1,7 +1,7 @@
 import 'default_response.dart';
 
 class mCreateOrUpdateLot extends DefaultResponse {
-  int id;
+  int? id;
 
   mCreateOrUpdateLot.fromJson(Map<String, dynamic> json)
       : super.fromJson(json) {
