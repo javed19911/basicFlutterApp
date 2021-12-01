@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import 'language.dart';
 
 class LanguageMr extends Language {
+  @override
+  String get userLabel => "वापरकर्तानाव प्रविष्ट करा";
 
   @override
-  String get userLabel => "输入用户名 / Enter username";
+  String get passwordLabel => "पासवर्ड टाका";
 
   @override
-  String get passwordLabel => "输入密码 / Enter password";
+  String get loginLabel => "लॉगिन करा";
 
   @override
-  String get loginLabel => "登录 / Login";
+  String get signUpLabel => "साइनअप करा";
 
   @override
-  String get logOutLabel => "退出";
+  String get logOutLabel => "बाहेर पडणे";
 
   @override
-  String get requiredWarningText => "请输入值 / Please enter value";
+  String get requiredWarningText => "कृपया मूल्य प्रविष्ट करा";
 
   @override
   String get labelCreateNewLot => 'नवीन लॉट् तयार करा';

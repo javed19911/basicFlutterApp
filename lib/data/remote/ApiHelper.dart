@@ -1,3 +1,5 @@
+import 'package:basic_flutter_app/data/models/login_reponse.dart';
+
 import '../models/CommodityResponse.dart';
 import '../models/LotResponse.dart';
 import '../models/default_response.dart';
@@ -8,7 +10,7 @@ abstract class ApiHelper {
 
   Future<OTP_Reponse> validateOTP(String phoneNumber, String OTP);
 
-  Future<OTP_Reponse> validateUser(String email, String password);
+  Future<LoginResponse> validateUser(String email, String password);
 
   Future<LotResponse> getLots(String token, String email, Map filterOption);
 

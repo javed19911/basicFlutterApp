@@ -1,5 +1,6 @@
 class Strings {
-  static String app_name = "INTELLO LABS";
-  static String welcomeMessage = "INTELLO LABS";
+  // static String app_name = "Basic Flutter App";
+  static String app_name = "N-Learn";
+  static String welcomeMessage = "Welcome to UEnics - Basic Flutter App";
   static String login = "Login";
 }

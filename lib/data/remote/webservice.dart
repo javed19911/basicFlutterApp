@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:basic_flutter_app/data/models/login_reponse.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/UtilFunctions.dart';
@@ -14,11 +15,12 @@ import 'ApiHelper.dart';
 
 class Webservice implements ApiHelper {
   //staging
-  static String BASE_HOST_URL = "http://3.7.230.206:3000";
+  static String BASE_HOST_URL =
+      "https://script.google.com/macros/s/AKfycbznmdggaAnP9OjcQQqg65EAAI83-JTWlErJpTgRQs729BgKkVQ0Gj1XLPeUFQ77Uba5/exec";
 
   //production
   //static final String BASE_HOST_URL = "http://staging.praman.ai" ;
-  static String BASE_URL = BASE_HOST_URL + "/api/";
+  static String BASE_URL = BASE_HOST_URL + "";
 
   Future<Map<String, String>> getHeader() async {
     Locale lang = await AppPreferencesHelper().getSelectedLanguage();
@@ -45,33 +47,42 @@ class Webservice implements ApiHelper {
   }
 
   @override
-  Future<OTP_Reponse> validateUser(String email, String password) async {
+  Future<LoginResponse> validateUser(String email, String password) async {
     if (!await isInternet()) {
       throw Exception("Check your Internet connection");
     }
-    ;
     int timeZoneOffset = UtilFunctions.getLocalTimezoneOffsetInSeconds();
 
     Map data = {
-      "email": "$email",
-      "password": "$password",
-      "device_token": "",
-      "offset": timeZoneOffset
+      "action": "login",
+      "user_name": "$email",
+      "password": "$password"
+      // "device_token": "",
+      // "offset": timeZoneOffset
     };
 
     String body = json.encode(data);
 
-    final response = await http.post(
-        Uri.parse(BASE_URL + "users/login_with_otp"),
+    final response = await http.get(
+        Uri.parse(
+            BASE_URL + "?action=login&user_name=$email&password=$password"),
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
-        },
-        body: body);
+        });
+
+    // final response = await http.post(
+    //     Uri.parse(
+    //         "https://script.google.com/macros/s/AKfycbznmdggaAnP9OjcQQqg65EAAI83-JTWlErJpTgRQs729BgKkVQ0Gj1XLPeUFQ77Uba5/exec"),
+    //     // headers: {
+    //     //   "Accept": "application/json",
+    //     //   "Content-Type": "application/json"
+    //     // },
+    //     body: data);
 
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
-      return OTP_Reponse.fromJson(body);
+      return LoginResponse.fromJson(body);
     } else {
       throw Exception("Unable to perform request!");
     }

@@ -5,15 +5,9 @@ import '../../data/DataManager.dart';
 import 'package:praman_flutter/data/DataManager.dart';*/
 
 abstract class BaseViewModel<N> extends ChangeNotifier {
-  bool _mIsLoading = false;
+  bool mIsLoading = false;
 
-  N? _navigator;
-
-  N? get navigator => _navigator;
-
-  set navigator(N? value) {
-    _navigator = value;
-  }
+  N? navigator;
 
   late DataManager _dataManager;
 
@@ -22,10 +16,4 @@ abstract class BaseViewModel<N> extends ChangeNotifier {
   }
 
   DataManager get dataManager => _dataManager;
-
-  bool get mIsLoading => _mIsLoading;
-
-  set mIsLoading(bool isLoading) {
-    _mIsLoading = isLoading;
-  }
 }

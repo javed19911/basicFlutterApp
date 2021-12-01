@@ -1,21 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:basic_flutter_app/res/string/Strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:UControl/res/string/Strings.dart';
-import 'package:UControl/ui/base/BaseActivity.dart';
-
+import '../../../ui/base/BaseActivity.dart';
 import '../vmLogin.dart';
 
 class EnterPhoneNumber extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _enterPhoneNumberPage();
+  State<StatefulWidget> createState() => _EnterPhoneNumberPage();
 }
 
-class _enterPhoneNumberPage extends BaseActivity<EnterPhoneNumber, vmLogin> {
-  final TextEditingController _phone_controller = TextEditingController();
+class _EnterPhoneNumberPage extends BaseActivity<EnterPhoneNumber, vmLogin> {
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
-  Widget getWidget(BuildContext context, vmLogin? view_model) {
+  Widget getWidget(BuildContext context, vmLogin? viewModel) {
     return Column(children: <Widget>[
       Expanded(
         child: Stack(
@@ -87,10 +85,10 @@ class _enterPhoneNumberPage extends BaseActivity<EnterPhoneNumber, vmLogin> {
                           borderRadius: BorderRadius.circular(4.0),
                         ),
                         child: TextField(
-                          controller: _phone_controller,
+                          controller: _phoneController,
                           keyboardType: TextInputType.phone,
                           inputFormatters: <TextInputFormatter>[
-                            WhitelistingTextInputFormatter.digitsOnly
+                            FilteringTextInputFormatter.digitsOnly,
                           ],
                           decoration: InputDecoration(
                             prefixIcon:

@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:basic_flutter_app/data/models/login_reponse.dart';
+
 import 'DataManager.dart';
 import 'local/prefs/AppPreferencesHelper.dart';
 import 'local/prefs/PreferencesHelper.dart';
@@ -168,7 +170,7 @@ class AppDataManager implements DataManager {
   }
 
   @override
-  Future<OTP_Reponse> validateUser(String email, String password) {
+  Future<LoginResponse> validateUser(String email, String password) {
     return webservice.validateUser(email, password);
   }
 

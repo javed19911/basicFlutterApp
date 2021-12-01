@@ -2,19 +2,22 @@ import 'language.dart';
 
 class LanguageKn extends Language {
   @override
-  String get userLabel => "输入用户名 / Enter username";
+  String get userLabel => "ಬಳಕೆದಾರ ಹೆಸರನ್ನು ನಮೂದಿಸಿ";
 
   @override
-  String get passwordLabel => "输入密码 / Enter password";
+  String get passwordLabel => "ಪಾಸ್ವರ್ಡ್ ನಮೂದಿಸಿ";
 
   @override
-  String get loginLabel => "登录 / Login";
+  String get loginLabel => "ಲಾಗಿನ್ ಮಾಡಿ";
 
   @override
-  String get logOutLabel => "退出";
+  String get signUpLabel => "ಸೈನ್ ಅಪ್";
 
   @override
-  String get requiredWarningText => "请输入值 / Please enter value";
+  String get logOutLabel => "ಲಾಗ್ ಔಟ್";
+
+  @override
+  String get requiredWarningText => "ದಯವಿಟ್ಟು ಮೌಲ್ಯವನ್ನು ನಮೂದಿಸಿ";
 
   @override
   String get labelCreateNewLot => 'ಹೊಸ ಲಾಟ್ ರಚಿಸಿ';

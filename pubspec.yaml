@@ -1,4 +1,4 @@
-name: intello_track_image_upload_app
+name: basic_flutter_app
 description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
@@ -38,6 +38,7 @@ dependencies:
   fluttertoast: ^8.0.4
   provider: ^5.0.0
   geolocator: ^7.0.3
+  video_player: ^2.2.7
 
 dev_dependencies:
   flutter_test:

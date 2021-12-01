@@ -13,6 +13,8 @@ abstract class Language {
 
   String get loginLabel;
 
+  String get signUpLabel;
+
   String get logOutLabel;
 
   String get requiredWarningText;

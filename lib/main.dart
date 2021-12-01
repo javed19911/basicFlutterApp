@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: const Color(0xFF02BB9F),
-        primaryColorDark: const Color(0xFF038a75),
+        canvasColor: const Color(0xFF038a75),
         accentColor: const Color(0xFFFFAD32),
       ),
       initialRoute: '/',

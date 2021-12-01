@@ -1,4 +1,4 @@
-package com.intello.intello_track_image_upload_app
+package com.uenics.basic_flutter_app
 
 import io.flutter.embedding.android.FlutterActivity
 

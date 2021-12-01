@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
+import 'package:basic_flutter_app/res/color.dart';
+import 'package:basic_flutter_app/res/string/Strings.dart';
+import 'package:basic_flutter_app/utils/custom_widgets/customButton.dart';
+import 'package:basic_flutter_app/utils/custom_widgets/customText.dart';
+import 'package:basic_flutter_app/utils/logo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart';
 import '../../multiLanguage/lanuages/language.dart';
 import '../../ui/base/BaseActivity.dart';
 import '../../ui/login/vmLogin.dart';
@@ -27,7 +28,8 @@ class LoginActivity extends StatefulWidget {
 
 class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
     implements iLogin {
-  vmLogin? view_model;
+  vmLogin? viewModel;
+  var formKey = GlobalKey<FormState>();
   var progress;
 
   final TextEditingController _usernameController = TextEditingController();
@@ -37,92 +39,145 @@ class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
   @override
   void onCreate() async {
     super.onCreate();
-    var view_model = getViewModel();
-    if (view_model != null) {
-      view_model.navigator = this;
-      view_model.checkIfAlreadyLoggedIn();
+    var viewModel = getViewModel();
+    if (viewModel != null) {
+      viewModel.navigator = this;
+      viewModel.checkIfAlreadyLoggedIn();
     }
   }
 
   @override
   Widget getWidget(BuildContext buildContext, vmLogin? vm) {
-    this.view_model = vm;
+    this.viewModel = vm;
     //vm.checkIfAlreadyLoggedIn();
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
       return AnimatedContainer(
           duration: Duration(milliseconds: 500),
-          color: Colors.white,
+          color: Colors.blue.shade50,
           padding: constraints.maxWidth < 500
               ? EdgeInsets.zero
               : const EdgeInsets.all(30.0),
           child: Stack(
             children: [
               Container(
-                  padding: EdgeInsets.only(top: 96.0),
+                  padding: EdgeInsets.only(top: 66.0),
                   child: SingleChildScrollView(
                     child: Column(children: <Widget>[
-                      Center(
-                          child: Image.asset(
-                        'images/intellologo.png',
-                        height: 64,
-                      )),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20.0),
+                      Logo(
+                        // color: Colors.white,
+                        textSize: 20,
                       ),
-                      Center(
-                          child: Text(
-                              "Welcome to Intello Labs - Produce Tracker",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 16.0))),
-                      Container(
-                        padding: const EdgeInsets.all(32.0),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Form(
+                        key: formKey,
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            TextFormField(
-                              decoration: InputDecoration(
-                                  labelText: Language.of(context).userLabel),
-                              validator: checkEmptyValidation,
-                              controller: _usernameController,
-                              /*onChanged: (text) {
-                                if (button_enabled != text.length >= 10) {
-                                  setState(() {
-                                    button_enabled = text.length >= 10;
-                                  });
-                                }
-                              },*/
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                  labelText:
-                                      Language.of(context).passwordLabel),
-                              validator: checkEmptyValidation,
-                              controller: _passwordController,
-                              obscureText: true,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: MaterialButton(
-                                color: HexColor.fromHex("#2A654E"),
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  if (vm?.mIsLoading != true) {
-                                    vm?.validateUser(
-                                        buildContext,
-                                        _usernameController.text,
-                                        _passwordController.text);
-                                  }
-                                },
-                                child: Text(Language.of(context).loginLabel),
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextFormField(
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                        prefixIcon: Padding(
+                                          padding: EdgeInsets.all(0.0),
+                                          child: Icon(
+                                            Icons.account_circle_outlined,
+                                            color: Colors.blue,
+                                          ), // icon is 48px widget.
+                                        ),
+                                        labelText: "Enter phone/email"),
+                                    validator: checkEmptyValidation,
+                                    controller: _usernameController,
+                                    /*onChanged: (text) {
+                                                      if (button_enabled != text.length >= 10) {
+                                                        setState(() {
+                                                          button_enabled = text.length >= 10;
+                                                        });
+                                                      }
+                                                    },*/
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    decoration: InputDecoration(
+                                        prefixIcon: Padding(
+                                          padding: EdgeInsets.all(0.0),
+                                          child: Icon(
+                                            Icons.password,
+                                            color: Colors.blue,
+                                          ), // icon is 48px widget.
+                                        ),
+                                        labelText:
+                                            Language.of(context).passwordLabel),
+                                    validator: checkEmptyValidation,
+                                    controller: _passwordController,
+                                    obscureText: true,
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: RoundButton(
+                                      fontSize: 20,
+                                      minWidth: 250,
+                                      color: Colors.blue.shade400,
+                                      text: Language.of(context).loginLabel,
+                                      onPressed: () {
+                                        if (vm?.mIsLoading != true) {
+                                          if (formKey.currentState!
+                                              .validate()) {
+                                            vm?.validateUser(
+                                                buildContext,
+                                                _usernameController.text,
+                                                _passwordController.text);
+                                          }
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
+                            )
                           ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          openSignUpActivity();
+                        },
+                        child: Text.rich(TextSpan(text: 'New User? ',
+                            // style: TextStyle(
+                            //   color: Colors.red.shade500,
+                            // ),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: 'SignUp',
+                                style: TextStyle(
+                                    color: CustomColors.darkGreen(),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline),
+                              )
+                            ])),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10),
+                        child: SimpleText(
+                          "UEnics©2021",
+                          fontSize: 12,
                         ),
                       ),
                     ]),
@@ -131,7 +186,7 @@ class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
                 child: vm?.mIsLoading == true
                     ? new CircularProgressIndicator()
                     : null,
-              )
+              ),
             ],
           ));
     }));
@@ -147,6 +202,11 @@ class _LoginPageState extends BaseActivity<LoginActivity, vmLogin>
   @override
   void openHomeActivity() {
     replaceNamedActivity("/home");
+  }
+
+  @override
+  void openSignUpActivity() {
+    replaceNamedActivity("/signup");
   }
 
   // @override

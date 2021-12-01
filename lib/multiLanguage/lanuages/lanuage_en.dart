@@ -13,6 +13,9 @@ class LanguageEn extends Language {
   String get loginLabel => "Login";
 
   @override
+  String get signUpLabel => "SignUp";
+
+  @override
   String get logOutLabel => "Logout";
 
   @override

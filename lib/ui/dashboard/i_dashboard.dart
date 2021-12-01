@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-abstract class iLogin {
-  void openHomeActivity();
-  void openSignUpActivity();
+abstract class IDashboard {
+  void openLoginActivity();
 
   /*Widget getEnterPhoneNumberWidget(BuildContext buildContext);
 
