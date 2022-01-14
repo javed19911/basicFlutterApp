@@ -1,42 +1,24 @@
+import 'package:basic_flutter_app/data/models/category_details_reponse.dart';
+import 'package:basic_flutter_app/data/models/category_reponse.dart';
 import 'package:basic_flutter_app/data/models/login_reponse.dart';
+import 'package:basic_flutter_app/data/models/m_category.dart';
+import 'package:basic_flutter_app/data/models/m_group.dart';
 
-import '../models/CommodityResponse.dart';
-import '../models/LotResponse.dart';
 import '../models/default_response.dart';
 import '../models/otp_reponse.dart';
 
 abstract class ApiHelper {
-  Future<DefaultResponse> generateOTP(String phone_number);
+  Future<DefaultResponse> generateOTP(String phoneNumber);
 
-  Future<OTP_Reponse> validateOTP(String phoneNumber, String OTP);
+  Future<OTP_Reponse> validateOTP(String phoneNumber, String otp);
 
   Future<LoginResponse> validateUser(String email, String password);
 
-  Future<LotResponse> getLots(String token, String email, Map filterOption);
+  Future<LoginResponse> createUser(
+      String token, String email, String mobile, String password);
 
-  Future<CommodityResponse> getCommodityList(String token, String email);
+  Future<CategoryResponse> getCategories(String token, {GroupM? group});
 
-  // Future<mCreateOrUpdateLot> addAndCreateLot(
-  //     int lotId,
-  //     int commodityId,
-  //     int imageCount,
-  //     bool isInternal,
-  //     String token,
-  //     String quantity,
-  //     String price,
-  //     String variety,
-  //     String size);
-
-  Future<DefaultResponse> uploadLotImage(
-      String token,
-      String email,
-      String temp_id,
-      String location_type_name,
-      String job_process_name,
-      int job_process_id,
-      int product_id,
-      String imagePath,
-      String longitude,
-      String latitude,
-      bool is_ai_image);
+  Future<CategoryDetailsResponse> getCategoryDetail(
+      String token, CategoryM category);
 }

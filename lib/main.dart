@@ -1,12 +1,23 @@
+import 'dart:convert';
+
+import 'package:basic_flutter_app/utils/freecharge/gateway_webview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'data/AppDataManager.dart';
 import 'multiLanguage/localization_delegate.dart';
 import 'res/string/Strings.dart';
 import 'route_generator.dart';
+import 'package:crypto/crypto.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   runApp(MyApp());
 }
 
@@ -27,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale;
   AppDataManager _dataManager = AppDataManager();
   void setLocale(Locale locale) {
+    _dataManager.setLanguage(locale.languageCode);
     setState(() {
       _locale = locale;
     });
@@ -43,38 +55,46 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: Strings.app_name,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: const Color(0xFF02BB9F),
-        canvasColor: const Color(0xFF038a75),
-        accentColor: const Color(0xFFFFAD32),
-      ),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
-      locale: _locale,
-      supportedLocales: [
-        Locale('en'),
-        Locale('hi'),
-        Locale('mr'),
-        Locale('kn')
-      ],
-      localizationsDelegates: [
-        AppLocalizationDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale?.languageCode) {
-            return supportedLocale;
-          }
-        }
-        return supportedLocales.first;
-      },
-    );
+    return ScreenUtilInit(
+        minTextAdapt: true,
+        builder: () {
+          return MaterialApp(
+            title: Strings.app_name,
+            theme: ThemeData(
+              brightness: Brightness.light,
+              textTheme: GoogleFonts.poppinsTextTheme(),
+              canvasColor: Colors.transparent,
+              // primaryColor: const Color(0xFF02BB9F),
+              // canvasColor: const Color(0xFF038a75),
+              // accentColor: const Color(0xFFFFAD32),
+            ),
+            // home: GatewayWebView(),
+            initialRoute: '/',
+            onGenerateRoute: RouteGenerator.generateRoute,
+            locale: _locale,
+            supportedLocales: [
+              Locale('en'),
+              Locale('hi'),
+              Locale('mr'),
+              Locale('as'),
+              Locale('kn')
+            ],
+            localizationsDelegates: [
+              AppLocalizationDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            localeResolutionCallback: (locale, supportedLocales) {
+              for (var supportedLocale in supportedLocales) {
+                if (supportedLocale.languageCode == locale?.languageCode) {
+                  return supportedLocale;
+                }
+              }
+              return supportedLocales.first;
+            },
+          );
+        });
   }
 }
 

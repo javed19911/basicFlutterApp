@@ -3,6 +3,8 @@ import 'package:basic_flutter_app/utils/custom_widgets/customButton.dart';
 import 'package:basic_flutter_app/utils/custom_widgets/customText.dart';
 import 'package:basic_flutter_app/utils/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../multiLanguage/lanuages/language.dart';
 import '../../ui/base/BaseActivity.dart';
 import '../../ui/login/vmLogin.dart';
@@ -27,6 +29,30 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final TextEditingController _ipController = TextEditingController();
+
+  FocusNode _passwordNode = FocusNode();
+  FocusNode _confirmPasswordNode = FocusNode();
+
+  bool _showPassword = false;
+  bool _showConfirmPassword = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _passwordNode.addListener(() {
+      setState(() {
+        _showPassword = !_passwordNode.hasFocus;
+      });
+    });
+
+    _confirmPasswordNode.addListener(() {
+      setState(() {
+        _showConfirmPassword = !_confirmPasswordNode.hasFocus;
+      });
+    });
+  }
 
   @override
   void onCreate() async {
@@ -76,6 +102,8 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
@@ -85,7 +113,7 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                         color: Colors.blue,
                                       ), // icon is 48px widget.
                                     ),
-                                    labelText: "Enter Email"),
+                                    labelText: Language.of(context).email),
                                 validator: checkEmptyValidation,
                                 keyboardType: TextInputType.emailAddress,
                                 controller: _emailController,
@@ -101,6 +129,8 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                 height: 10,
                               ),
                               TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
@@ -110,7 +140,7 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                         color: Colors.blue,
                                       ), // icon is 48px widget.
                                     ),
-                                    labelText: "Enter Phone Number"),
+                                    labelText: Language.of(context).mobile),
                                 keyboardType: TextInputType.phone,
                                 validator: phoneValidation,
                                 maxLength: 10,
@@ -127,6 +157,9 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                 height: 10,
                               ),
                               TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                focusNode: _passwordNode,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
@@ -136,16 +169,18 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                         color: Colors.blue,
                                       ), // icon is 48px widget.
                                     ),
-                                    labelText:
-                                        Language.of(context).passwordLabel),
-                                validator: checkEmptyValidation,
+                                    labelText: Language.of(context).password),
+                                validator: checkPasswordValidation,
                                 controller: _passwordController,
-                                obscureText: true,
+                                obscureText: _showPassword,
                               ),
                               SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                focusNode: _confirmPasswordNode,
                                 decoration: InputDecoration(
                                     prefixIcon: Padding(
                                       padding: EdgeInsets.all(0.0),
@@ -154,10 +189,11 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                         color: Colors.blue,
                                       ), // icon is 48px widget.
                                     ),
-                                    labelText: "Confirm Password"),
+                                    labelText:
+                                        Language.of(context).confirmPassword),
                                 validator: passwordValidation,
                                 controller: _confirmPasswordController,
-                                obscureText: true,
+                                obscureText: _showConfirmPassword,
                               ),
                               SizedBox(
                                 height: 30,
@@ -168,13 +204,14 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                                   fontSize: 20,
                                   minWidth: 250,
                                   color: Colors.blue.shade400,
-                                  text: Language.of(context).signUpLabel,
+                                  text: Language.of(context).signUp,
                                   onPressed: () {
                                     if (vm?.mIsLoading != true) {
                                       if (formKey.currentState!.validate()) {
-                                        vm?.validateUser(
+                                        vm?.createUser(
                                             buildContext,
                                             _emailController.text,
+                                            _phoneController.text,
                                             _passwordController.text);
                                       }
                                     }
@@ -191,18 +228,19 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
                     onTap: () {
                       openLoginActivity();
                     },
-                    child:
-                        Text.rich(TextSpan(text: 'Already a registered user? ',
-                            // style: TextStyle(
-                            //   color: Colors.red.shade500,
-                            // ),
-                            children: <InlineSpan>[
+                    child: Text.rich(TextSpan(
+                        text: Language.of(context).alreadyRegisteredUser,
+                        // style: TextStyle(
+                        //   color: Colors.red.shade500,
+                        // ),
+                        children: <InlineSpan>[
                           TextSpan(
-                            text: 'SignIn',
-                            style: TextStyle(
-                                color: CustomColors.darkGreen(),
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            text: Language.of(context).signIn,
+                            style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12.sp,
+                                color: Colors.blue,
+                                height: 0.9,
                                 decoration: TextDecoration.underline),
                           )
                         ])),
@@ -231,6 +269,18 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
   }
 
   String? checkEmptyValidation(value) {
+    var regExp = RegExp(r'(^[a-z0-9]+@[a-z]+\.[a-z]{2,3})');
+
+    if (value!.isEmpty || !regExp.hasMatch(value)) {
+      return Language.of(context).enterValidEmail;
+    }
+    // if (value.isEmpty) {
+    //   return Language.of(context).requiredWarningText;
+    // }
+    return null;
+  }
+
+  String? checkPasswordValidation(value) {
     if (value.isEmpty) {
       return Language.of(context).requiredWarningText;
     }
@@ -241,20 +291,25 @@ class _SignUpPageState extends BaseActivity<SignUpActivity, SignUpVM>
     if (value.isEmpty) {
       return Language.of(context).requiredWarningText;
     } else if (value != _passwordController.text) {
-      return "please enter same password";
+      return Language.of(context).enterSamePassword;
     }
     return null;
   }
 
   String? phoneValidation(value) {
-    if (value.isEmpty) {
-      return Language.of(context).requiredWarningText;
-      // } else if (value.toString().startsWith("+") &&
-      //     value.toString().length != 13) {
-      //   return "please enter valid phone number";
-    } else if (value.toString().length != 10) {
-      return "please enter valid phone number";
+    var regExp = RegExp(r'(^[5-9]\d{9}$)');
+
+    if (value!.isEmpty || !regExp.hasMatch(value)) {
+      return Language.of(context).enterValidMobile;
     }
+    // if (value.isEmpty) {
+    //   return Language.of(context).requiredWarningText;
+    //   // } else if (value.toString().startsWith("+") &&
+    //   //     value.toString().length != 13) {
+    //   //   return "please enter valid phone number";
+    // } else if (value.toString().length != 10) {
+    //   return "please enter valid phone number";
+    // }
     return null;
   }
 

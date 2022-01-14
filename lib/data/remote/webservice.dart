@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:basic_flutter_app/data/models/category_details_reponse.dart';
+import 'package:basic_flutter_app/data/models/category_reponse.dart';
 import 'package:basic_flutter_app/data/models/login_reponse.dart';
+import 'package:basic_flutter_app/data/models/m_category.dart';
+import 'package:basic_flutter_app/data/models/m_group.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import '../../utils/UtilFunctions.dart';
 import '../local/prefs/AppPreferencesHelper.dart';
-import '../models/CommodityResponse.dart';
-import '../models/LotResponse.dart';
 import '../models/default_response.dart';
 import '../models/otp_reponse.dart';
 
@@ -16,7 +19,7 @@ import 'ApiHelper.dart';
 class Webservice implements ApiHelper {
   //staging
   static String BASE_HOST_URL =
-      "https://script.google.com/macros/s/AKfycbznmdggaAnP9OjcQQqg65EAAI83-JTWlErJpTgRQs729BgKkVQ0Gj1XLPeUFQ77Uba5/exec";
+      "https://script.google.com/macros/s/AKfycbwVTotdOS_TGO9EXF8jaxlk8v0kWYTCz6a_Ma8-y0FljLRiZWnBJoQ5WYSAI-dO05Xv/exec";
 
   //production
   //static final String BASE_HOST_URL = "http://staging.praman.ai" ;
@@ -51,9 +54,9 @@ class Webservice implements ApiHelper {
     if (!await isInternet()) {
       throw Exception("Check your Internet connection");
     }
-    int timeZoneOffset = UtilFunctions.getLocalTimezoneOffsetInSeconds();
+    // int timeZoneOffset = UtilFunctions.getLocalTimezoneOffsetInSeconds();
 
-    Map data = {
+    var data = {
       "action": "login",
       "user_name": "$email",
       "password": "$password"
@@ -61,29 +64,20 @@ class Webservice implements ApiHelper {
       // "offset": timeZoneOffset
     };
 
-    String body = json.encode(data);
-
-    final response = await http.get(
-        Uri.parse(
-            BASE_URL + "?action=login&user_name=$email&password=$password"),
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        });
-
-    // final response = await http.post(
-    //     Uri.parse(
-    //         "https://script.google.com/macros/s/AKfycbznmdggaAnP9OjcQQqg65EAAI83-JTWlErJpTgRQs729BgKkVQ0Gj1XLPeUFQ77Uba5/exec"),
-    //     // headers: {
-    //     //   "Accept": "application/json",
-    //     //   "Content-Type": "application/json"
-    //     // },
-    //     body: data);
+    var response = await Dio().get(
+      BASE_URL,
+      queryParameters: data,
+    );
+    // final response =
+    //     await http.post(Uri.parse(BASE_URL), followRedirects: true, body: data);
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      return LoginResponse.fromJson(body);
+      print("body : ${response.data}");
+      // final body = jsonDecode(response.data);
+      // print("body : ${body}");
+      return LoginResponse.fromJson(response.data);
     } else {
+      print("body : ${response.data}");
       throw Exception("Unable to perform request!");
     }
   }
@@ -153,112 +147,92 @@ class Webservice implements ApiHelper {
   }
 
   @override
-  Future<LotResponse> getLots(
-      String token, String email, Map filterOption) async {
+  Future<CategoryResponse> getCategories(String token, {GroupM? group}) async {
     if (!await isInternet()) {
       throw Exception("Check your Internet connection");
     }
-    ;
-
-    int timeZoneOffset = UtilFunctions.getLocalTimezoneOffsetInSeconds();
-    //int currentTimestamp = UtilFunctions.getUnixTimeStamp(new DateTime.now());
-
-    Map data = {
-      'token': token,
-      'email': email,
-      'local_timezone': timeZoneOffset,
-      //'date_time': currentTimestamp
-      'options': filterOption
+    var data = {
+      "action": "categories",
+      'auth_key': token,
+      'group_id': group == null ? 0 : group.id,
     };
-
-    String body = json.encode(data);
-
-    final response = await http.post(
-        Uri.parse(BASE_URL + "v2/inspections/index"),
-        /*final response = await http.post(
-        "http://trade.praman.ai/api/v23/lots/index",*/
-        headers: await getHeader(),
-        body: body);
+    var response = await Dio().get(
+      BASE_URL,
+      queryParameters: data,
+    );
+    // final response =
+    //     await http.post(Uri.parse(BASE_URL), followRedirects: true, body: data);
 
     if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      //print("body : ${body}");
-      return LotResponse.fromJson(body);
+      print("body : ${response.data}");
+      // final body = jsonDecode(response.data);
+      // print("body : ${body}");
+      return CategoryResponse.fromJson(response.data);
     } else {
+      print("body : ${response.data}");
       throw Exception("Unable to perform request!");
     }
   }
 
   @override
-  Future<CommodityResponse> getCommodityList(String token, String email) async {
+  Future<CategoryDetailsResponse> getCategoryDetail(
+      String token, CategoryM category) async {
     if (!await isInternet()) {
       throw Exception("Check your Internet connection");
     }
-
-    Map data = {
-      'token': token,
-      'email': email,
+    var data = {
+      "action": "categoryDetails",
+      'auth_key': token,
+      'category_id': category.id,
+      'group_id': category.group.id,
     };
-
-    String body = json.encode(data);
-
-    final response = await http.post(
-        Uri.parse(BASE_URL + "v2/inspections/commodities"),
-        /* final response = await http.post(
-        "http://3.7.230.206:4000/api/pfg_test/inspections/commodities",*/
-        headers: await getHeader(),
-        body: body);
+    var response = await Dio().get(
+      BASE_URL,
+      queryParameters: data,
+    );
+    // final response =
+    //     await http.post(Uri.parse(BASE_URL), followRedirects: true, body: data);
 
     if (response.statusCode == 200) {
-      final body1 = jsonDecode(response.body);
-      return CommodityResponse.fromJson(body1);
+      print("body : ${response.data}");
+      // final body = jsonDecode(response.data);
+      // print("body : ${body}");
+      return CategoryDetailsResponse.fromJson(response.data);
     } else {
+      print("body : ${response.data}");
       throw Exception("Unable to perform request!");
     }
   }
 
   @override
-  Future<DefaultResponse> uploadLotImage(
-      String token,
-      String email,
-      String temp_id,
-      String location_type_name,
-      String job_process_name,
-      int job_process_id,
-      int product_id,
-      String imagePath,
-      String longitude,
-      String latitude,
-      bool is_ai_image) async {
+  Future<LoginResponse> createUser(
+      String token, String email, String mobile, String password) async {
     if (!await isInternet()) {
       throw Exception("Check your Internet connection");
     }
-
-    Map data = {
-      "token": token,
-      "email": email,
-      "temp_id": temp_id,
-      "location_type_name": location_type_name,
-      "job_process_name": job_process_name,
-      "job_process_id": job_process_id,
-      "product_id": product_id,
-      "image": imagePath,
-      "longitude": longitude,
-      "latitude": latitude,
-      "is_ai_image": is_ai_image,
+    var data = {
+      "action": "create_user",
+      'auth_key': token,
+      'id': 0,
+      'name': email.split("@")[0],
+      'email': email,
+      'mobile': mobile,
+      'password': password,
     };
-
-    String body = json.encode(data);
-
-    final response = await http
-        //.post(BASE_URL + "lots/gradings/classify_vegetable", body: body);
-        .post(Uri.parse("15.206.220.141:4000/api/v1/inspections/save_image"),
-            body: body);
+    var response = await Dio().get(
+      BASE_URL,
+      queryParameters: data,
+    );
+    // final response =
+    //     await http.post(Uri.parse(BASE_URL), followRedirects: true, body: data);
 
     if (response.statusCode == 200) {
-      final jsonBody = jsonDecode(response.body);
-      return DefaultResponse.fromJson(jsonBody);
+      print("body : ${response.data}");
+      // final body = jsonDecode(response.data);
+      // print("body : ${body}");
+      return LoginResponse.fromJson(response.data);
     } else {
+      print("body : ${response.data}");
       throw Exception("Unable to perform request!");
     }
   }

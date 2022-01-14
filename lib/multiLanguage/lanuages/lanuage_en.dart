@@ -4,248 +4,91 @@ import 'language.dart';
 
 class LanguageEn extends Language {
   @override
-  String get userLabel => "Enter username";
+  String get user => "Enter username";
 
   @override
-  String get passwordLabel => "Enter password";
+  String get newUser => 'New User';
 
   @override
-  String get loginLabel => "Login";
+  String get password => "Enter password";
 
   @override
-  String get signUpLabel => "SignUp";
+  String get login => "Login";
 
   @override
-  String get logOutLabel => "Logout";
+  String get signUp => "SignUp";
+
+  @override
+  String get signIn => "SignIn";
+
+  @override
+  String get logOut => "Logout";
 
   @override
   String get requiredWarningText => "Please enter value";
 
   @override
-  String get labelCreateNewLot => 'Create New Lot';
+  String get createNewLot => 'Create New Lot';
 
   @override
-  String get labelReferAndEarn => 'Refer & Earn';
+  String get referAndEarn => 'Refer & Earn';
 
   @override
   String get selectedLanguage => 'English';
 
   @override
-  String get labelSelectItems => 'Select Items';
+  String get watchHowToUseTheApp => 'Watch how to use the app';
 
   @override
-  String get labelClaimOffer => 'Claim Offer';
+  String get contactUsOnWhatsapp => 'Contact Us on Whatsapp';
 
   @override
-  String get labelYouHaveNotCreateAnyLotsToday =>
-      "You haven't created any lot today";
+  String get languagePreference => 'Language Preference';
 
   @override
-  String get labelWatchHowToUseTheApp => 'Watch how to use the app';
+  String get save => 'Save';
 
   @override
-  String get labelContactUsOnWhatsapp => 'Contact Us on Whatsapp';
+  String get addAnotherPhotos => 'Add Another Photo';
 
   @override
-  String get labelItem => 'Item';
+  String get retake => 'Retake';
 
   @override
-  String get labelLanguagePreference => 'Language Preference';
+  String get percentage => 'Percentage';
 
   @override
-  // TODO: implement labelSave
-  String get labelSave => 'Save';
+  String get photos => 'Photos';
 
   @override
-  // TODO: implement labelAddAnotherPhotos
-  String get labelAddAnotherPhotos => 'Add Another Photo';
+  String get sendViaWhatsApp => 'Send via WhatsApp';
 
   @override
-  String get labelRetake => 'Retake';
+  String get my => 'My';
 
   @override
-  String get labelCreateLot => 'Create Lot';
+  String get date => 'Date';
 
   @override
-  String get labelContactToBuy => 'Contact to buy';
-
-  @override
-  String get labelEditLotDetails => 'Edit Lot Details';
-
-  @override
-  String get labelMarkAsIncorrect => 'Mark as incorrect';
-
-  @override
-  String get labelMarkAsSold => 'Mark as Sold';
-
-  @override
-  String get labelPercentage => 'Percentage';
-
-  @override
-  String get labelPhotos => 'Photos';
-
-  @override
-  String get labelQualityReport => 'Quality Report';
-
-  @override
-  String get labelSendViaWhatsApp => 'Send via WhatsApp';
-
-  @override
-  String get labelBuy => 'Buy';
-
-  @override
-  String get labelLots => 'Lots';
-
-  @override
-  String get labelMy => 'My';
-
-  @override
-  String get labelNotify => 'Notify';
-
-  @override
-  String get labelDate => 'Date';
-
-  @override
-  String get labelToday => 'Today';
-
-  @override
-  String get labelNotifyBuyers => 'Notify Buyers';
+  String get today => 'Today';
 
   @override
   String get addToContact => 'Add from Contacts';
 
   @override
-  String get addSelected => 'Add Selected';
-
-  @override
-  String get buyThisLot => 'Buy This Lot';
-
-  @override
-  String get displayText =>
-      'Earn Rs 50 by creating a wholesale lot.Create a wholesale lot of onion, potato, tomato or garlic to show you are a wholesaler.Create a lot with at-least 1 good photo with 50 items in it';
-
-  @override
-  String get enterDetails => 'Enter Details';
-
-  @override
-  String get price => 'Price';
-
-  @override
-  String get quantity => 'Quantity';
-
-  @override
-  String get size => 'Size';
-
-  @override
-  String get variety => 'Variety';
-
-  @override
-  String get addAndCreateLot => 'Add & Create Lot';
-
-  @override
   String get required => 'required';
-
-  @override
-  String get addBuyers => 'Add Buyers';
 
   @override
   String get searchContacts => 'Search Contacts';
 
   @override
-  String get addContactsHereToUpdateThemViaSms =>
-      'Add contacts here to update \n them via SMS whenever you \n create your lots.';
-
-  @override
-  String get theseContactsWillReceiveSmsWhenEverYouCreateYourLots =>
-      'These contacts will receive SMS \n whenever you create your lots \n and can view your lots.';
-
-  @override
   String get cancel => 'Cancel';
-
-  @override
-  String get descriptionRemoveBuyerContacts =>
-      'This contacts will no longer receive SMS updates when you create lots.';
-
-  @override
-  String get remove => 'Remove';
-
-  @override
-  String get removeBuyerContact => 'Remove Buyer Contact?';
-
-  @override
-  String get areYouSureYouHaveSoldLot =>
-      'Are you sure you’ve sold the entire lot?';
-
-  @override
-  String get editLot => 'Edit Lot';
-
-  @override
-  String get markAsSold => 'Mark as Sold';
-
-  @override
-  String get soldLotDescription =>
-      'If you have not sold the entire lot, you can edit the quantity instead.';
-
-  @override
-  String get areYouSureQualityReportIsIncorrect =>
-      'Are you sure the Quality Report is incorrect?';
-
-  @override
-  String get qualityReportIsIncorrectDescription =>
-      'If you mark this quality report as incorrect, this lot will not be visible to buyers on the app.';
-
-  @override
-  String get lotDetails => 'Lot Details';
-
-  @override
-  String get saveDetails => 'Save Details';
-
-  @override
-  String get sold => 'Sold';
-
-  @override
-  String get lot => 'Lot';
-
-  @override
-  String get collect => 'Collect';
-
-  @override
-  String get referDescription =>
-      'Refer a wholesaler of onion, potato, tomato, garlic, ginger or pomegranate on Praman and earn'
-      ' ₹50 when they create a wholesale lot! They earn ₹50 too.';
 
   @override
   String get shareWithContacts => 'Share with contacts';
 
   @override
-  String get order => 'Order';
-
-  @override
-  String get placeYourRequirement => 'Place Your Requirement';
-
-  @override
-  String get deliveryLocation => 'Delivery Location';
-
-  @override
-  String get UPIId => 'UPI ID';
-
-  @override
-  String get provideUPIId => 'Provide UPI ID';
-
-  @override
-  String get verifyUPIId => 'Verify UPI ID';
-
-  @override
-  String get yourUPId => 'Your UPI ID';
-
-  @override
-  String get confirmUPIId => 'Confirm UPI ID';
-
-  @override
   String get enterAgain => 'Enter Again';
-
-  @override
-  String get collectWithin24hrs => 'Collect Within 24 Hours';
 
   @override
   String get contactNumber => 'Contact Number';
@@ -263,20 +106,54 @@ class LanguageEn extends Language {
   String get provideDetails => 'Provide Details';
 
   @override
-  String get amountPayable => 'Amount Payable';
+  String get alreadyRegisteredUser => 'Already a registered user? ';
 
   @override
-  String get verified => 'Verified';
+  String get confirmPassword => 'Confirm Password';
 
   @override
-  String get discoverNewLots => 'Discover New Lots';
+  String get email => 'Email';
 
   @override
-  String get mySellerLots => 'My Seller Lots';
+  String get emailOrMobile => 'Email or Mobile';
 
   @override
-  String get todayLots => "Today's lot";
+  String get forgotPassword => 'Forgot Password';
 
   @override
-  String get yesterdayLots => "Yesterday's lot";
+  String get mobile => 'Mobile';
+
+  @override
+  String get proceed => 'Proceed';
+
+  @override
+  String get enterValidEmail => "Please Enter Valid Email";
+
+  @override
+  String get enterValidMobile => "Please Enter Valid Mobile Number";
+
+  @override
+  String get enterSamePassword => "Please enter same password";
+
+  @override
+  String get appSlogan => "Let's Learn Together ";
+
+  @override
+  String get loadingCategory =>
+      "Please wait..\nwhile I am loading categories..";
+
+  @override
+  String get loadingItem => "Please wait..\nwhile I am loading items..";
+
+  @override
+  String get noCategoryFound => "No Category Found";
+
+  @override
+  String get noItemFound => "No Item Found";
+
+  @override
+  String get categories => "Categories";
+
+  @override
+  String get viewAll => "view all";
 }

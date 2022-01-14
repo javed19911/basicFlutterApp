@@ -1,29 +1,26 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:basic_flutter_app/data/models/category_reponse.dart';
+import 'package:basic_flutter_app/data/models/m_category.dart';
+import 'package:basic_flutter_app/data/models/m_group.dart';
 import 'package:flutter/material.dart';
 import '../../data/DataManager.dart';
 import '../../ui/base/BaseViewModel.dart';
 
-import 'i_sign_up.dart';
+import 'i_details.dart';
 
-class SignUpVM extends BaseViewModel<ISignUp> {
-  void createUser(
-      BuildContext context, String email, String mobile, String password) {
+class DetailsVM extends BaseViewModel<IDetails> {
+  CategoryM category;
+
+  DetailsVM(this.category);
+
+  void getCategoryDetails(BuildContext context) {
     mIsLoading = true;
     notifyListeners();
     dataManager.getAccessToken().then((token) => {
-          dataManager
-              .createUser(token!, email, mobile, password)
-              .then((response) {
+          dataManager.getCategoryDetail(token!, category).then((response) {
             if (response.success) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(
-                  "User Created Successfully..",
-                ),
-                duration: Duration(seconds: 3),
-              ));
-              navigator?.openLoginActivity();
+              category.items = response.items;
             } else {
               throw Exception(response.error?.errorMessage);
             }
@@ -40,5 +37,9 @@ class SignUpVM extends BaseViewModel<ISignUp> {
             notifyListeners();
           })
         });
+
+    // if (navigator != null) {
+    //   navigator.openHomeActivity();
+    // }
   }
 }

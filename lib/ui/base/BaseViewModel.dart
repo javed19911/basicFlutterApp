@@ -16,4 +16,5 @@ abstract class BaseViewModel<N> extends ChangeNotifier {
   }
 
   DataManager get dataManager => _dataManager;
+
 }

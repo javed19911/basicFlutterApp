@@ -7,153 +7,73 @@ abstract class Language {
 
   String get selectedLanguage;
 
-  String get userLabel;
+  String get user;
 
-  String get passwordLabel;
+  String get newUser;
 
-  String get loginLabel;
+  String get email;
 
-  String get signUpLabel;
+  String get mobile;
 
-  String get logOutLabel;
+  String get emailOrMobile;
+
+  String get password;
+
+  String get confirmPassword;
+
+  String get login;
+
+  String get signUp;
+
+  String get signIn;
+
+  String get logOut;
+
+  String get proceed;
+
+  String get forgotPassword;
+
+  String get alreadyRegisteredUser;
 
   String get requiredWarningText;
 
-  String get labelCreateNewLot;
+  String get createNewLot;
 
-  String get labelReferAndEarn;
+  String get referAndEarn;
 
-  String get labelSelectItems;
+  String get watchHowToUseTheApp;
 
-  String get labelClaimOffer;
+  String get contactUsOnWhatsapp;
 
-  String get labelYouHaveNotCreateAnyLotsToday;
+  String get languagePreference;
 
-  String get labelWatchHowToUseTheApp;
+  String get save;
 
-  String get labelContactUsOnWhatsapp;
+  String get retake;
 
-  String get labelItem;
+  String get addAnotherPhotos;
 
-  String get labelLanguagePreference;
+  String get percentage;
 
-  String get labelSave;
+  String get photos;
 
-  String get labelRetake;
+  String get sendViaWhatsApp;
 
-  String get labelAddAnotherPhotos;
+  String get my;
 
-  String get labelCreateLot;
+  String get today;
 
-  String get labelContactToBuy;
-
-  String get labelEditLotDetails;
-
-  String get labelMarkAsSold;
-
-  String get labelQualityReport;
-
-  String get labelMarkAsIncorrect;
-
-  String get labelPercentage;
-
-  String get labelPhotos;
-
-  String get labelSendViaWhatsApp;
-
-  String get labelLots;
-
-  String get labelMy;
-
-  String get labelBuy;
-
-  String get labelNotify;
-
-  String get labelToday;
-
-  String get labelDate;
-
-  String get labelNotifyBuyers;
+  String get date;
 
   String get addToContact;
 
-  String get addSelected;
-
-  String get buyThisLot;
-
-  String get displayText;
-
-  String get enterDetails;
-
-  String get quantity;
-
-  String get price;
-
-  String get variety;
-
-  String get size;
-
   String get required;
-
-  String get addAndCreateLot;
-
-  String get addBuyers;
 
   String get searchContacts;
 
-  String get addContactsHereToUpdateThemViaSms;
-
-  String get theseContactsWillReceiveSmsWhenEverYouCreateYourLots;
-
-  String get removeBuyerContact;
-
-  String get descriptionRemoveBuyerContacts;
-
   String get cancel;
 
-  String get remove;
-
-  String get areYouSureYouHaveSoldLot;
-
-  String get soldLotDescription;
-
-  String get markAsSold;
-
-  String get editLot;
-
-  String get areYouSureQualityReportIsIncorrect;
-
-  String get qualityReportIsIncorrectDescription;
-
-  String get lotDetails;
-
-  String get saveDetails;
-
-  String get sold;
-
-  String get lot;
-
-  String get referDescription;
-
   String get shareWithContacts;
-
-  String get collect;
-
-  String get order;
-
-  String get placeYourRequirement;
-
-  String get deliveryLocation;
-
-  String get provideUPIId;
-
-  String get yourUPId;
-
-  String get UPIId;
-
-  String get verifyUPIId;
-
-  String get confirmUPIId;
 
   String get enterAgain;
 
@@ -167,17 +87,23 @@ abstract class Language {
 
   String get contactNumber;
 
-  String get collectWithin24hrs;
+  String get enterValidEmail;
 
-  String get amountPayable;
+  String get enterValidMobile;
 
-  String get verified;
+  String get enterSamePassword;
 
-  String get discoverNewLots;
+  String get loadingCategory;
 
-  String get todayLots;
+  String get noCategoryFound;
 
-  String get yesterdayLots;
+  String get loadingItem;
 
-  String get mySellerLots;
+  String get noItemFound;
+
+  String get appSlogan;
+
+  String get categories;
+
+  String get viewAll;
 }

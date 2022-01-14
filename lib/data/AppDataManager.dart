@@ -1,15 +1,15 @@
 import 'dart:ui';
 
+import 'package:basic_flutter_app/data/models/category_details_reponse.dart';
+import 'package:basic_flutter_app/data/models/category_reponse.dart';
 import 'package:basic_flutter_app/data/models/login_reponse.dart';
+import 'package:basic_flutter_app/data/models/m_category.dart';
+import 'package:basic_flutter_app/data/models/m_group.dart';
 
 import 'DataManager.dart';
 import 'local/prefs/AppPreferencesHelper.dart';
 import 'local/prefs/PreferencesHelper.dart';
-import 'models/CommodityResponse.dart';
-import 'models/LotResponse.dart';
-import 'models/create_or_update_lot_response.dart';
 import 'models/default_response.dart';
-import 'models/filters_response.dart';
 import 'models/otp_reponse.dart';
 import 'remote/webservice.dart';
 
@@ -185,39 +185,56 @@ class AppDataManager implements DataManager {
   }
 
   @override
-  Future<LotResponse> getLots(String token, String email, Map filterOption) {
-    return webservice.getLots(token, email, filterOption);
+  Future<CategoryResponse> getCategories(String token, {GroupM? group}) {
+    return webservice.getCategories(token, group: group);
   }
 
   @override
-  Future<CommodityResponse> getCommodityList(String token, String email) {
-    return webservice.getCommodityList(token, email);
+  Future<CategoryDetailsResponse> getCategoryDetail(
+      String token, CategoryM category) {
+    return webservice.getCategoryDetail(token, category);
   }
 
   @override
-  Future<DefaultResponse> uploadLotImage(
-      String token,
-      String email,
-      String temp_id,
-      String location_type_name,
-      String job_process_name,
-      int job_process_id,
-      int product_id,
-      String imagePath,
-      String longitude,
-      String latitude,
-      bool is_ai_image) {
-    return webservice.uploadLotImage(
-        token,
-        email,
-        temp_id,
-        location_type_name,
-        job_process_name,
-        job_process_id,
-        product_id,
-        imagePath,
-        longitude,
-        latitude,
-        is_ai_image);
+  Future<LoginResponse> createUser(
+      String token, String email, String mobile, String password) {
+    return webservice.createUser(token, email, mobile, password);
   }
+
+  // @override
+  // Future<LotResponse> getLots(String token, String email, Map filterOption) {
+  //   return webservice.getLots(token, email, filterOption);
+  // }
+  //
+  // @override
+  // Future<CommodityResponse> getCommodityList(String token, String email) {
+  //   return webservice.getCommodityList(token, email);
+  // }
+  //
+  // @override
+  // Future<DefaultResponse> uploadLotImage(
+  //     String token,
+  //     String email,
+  //     String temp_id,
+  //     String location_type_name,
+  //     String job_process_name,
+  //     int job_process_id,
+  //     int product_id,
+  //     String imagePath,
+  //     String longitude,
+  //     String latitude,
+  //     bool is_ai_image) {
+  //   return webservice.uploadLotImage(
+  //       token,
+  //       email,
+  //       temp_id,
+  //       location_type_name,
+  //       job_process_name,
+  //       job_process_id,
+  //       product_id,
+  //       imagePath,
+  //       longitude,
+  //       latitude,
+  //       is_ai_image);
+  // }
 }

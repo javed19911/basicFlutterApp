@@ -19,44 +19,44 @@ class vmLogin extends BaseViewModel<iLogin> {
   }
 
   void validateUser(BuildContext context, String userName, String password) {
-    // mIsLoading = true;
-    // notifyListeners();
-    //
-    // dataManager.validateUser(userName, password).then((response) {
-    //   if (response.success) {
-    //     // dataManager.setRememberCredentials(true);
-    //     dataManager.setCurrentUserId(response.id);
-    //     dataManager.setCurrentUserName(response.username);
-    //     dataManager.setAccessToken(response.authenticationToken);
-    //     dataManager
-    //         .setCurrentUserLoggedInMode(LoggedInMode.LOGGED_IN_MODE_SERVER);
-    //     if (response.platformType.toLowerCase() == "auction") {
-    //       dataManager.setCurrentUserLoggedInPlatform(
-    //           LoggedInPlatform.LOGGED_IN_PLATFORM_AUCTIONER);
-    //     } else {
-    //       dataManager.setCurrentUserLoggedInPlatform(
-    //           LoggedInPlatform.LOGGED_IN_PLATFORM_TRADER);
-    //     }
-    //     dataManager.setCurrentUserEmail(response.email);
-    //     dataManager.setCurrentUserMobileNo(response.mobileNumber);
-    //     // dataManager.setCurrentUserRole(response.userType);
-    //
-    //     navigator?.openHomeActivity();
-    //   } else {
-    //     throw Exception(response.error?.errorMessage);
-    //   }
-    // }).catchError((e) {
-    //   print("Got error: ${e.toString()}");
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //     content: Text(
-    //       e.toString().replaceAll("Exception: ", ""),
-    //     ),
-    //     duration: Duration(seconds: 3),
-    //   ));
-    // }).whenComplete(() {
-    //   mIsLoading = false;
-    //   notifyListeners();
-    // });
+    mIsLoading = true;
+    notifyListeners();
+
+    dataManager.validateUser(userName, password).then((response) {
+      if (response.success) {
+        dataManager.setRememberCredentials(true);
+        dataManager.setCurrentUserId(response.user!.id!);
+        dataManager.setCurrentUserName(response.user!.name!);
+        dataManager.setAccessToken(response.user!.authenticationToken!);
+        dataManager
+            .setCurrentUserLoggedInMode(LoggedInMode.LOGGED_IN_MODE_SERVER);
+        // if (response.user!.platformType.toLowerCase() == "auction") {
+        //   dataManager.setCurrentUserLoggedInPlatform(
+        //       LoggedInPlatform.LOGGED_IN_PLATFORM_AUCTIONER);
+        // } else {
+        //   dataManager.setCurrentUserLoggedInPlatform(
+        //       LoggedInPlatform.LOGGED_IN_PLATFORM_TRADER);
+        // }
+        dataManager.setCurrentUserEmail(response.user!.email!);
+        dataManager.setCurrentUserMobileNo(response.user?.phoneNumber);
+        dataManager.setCurrentUserRole(response.user?.role);
+
+        navigator?.openHomeActivity();
+      } else {
+        throw Exception(response.error?.errorMessage);
+      }
+    }).catchError((e) {
+      print("Got error: ${e.toString()}");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          e.toString().replaceAll("Exception: ", ""),
+        ),
+        duration: Duration(seconds: 3),
+      ));
+    }).whenComplete(() {
+      mIsLoading = false;
+      notifyListeners();
+    });
 
     // if (navigator != null) {
     //   navigator.openHomeActivity();
@@ -64,26 +64,26 @@ class vmLogin extends BaseViewModel<iLogin> {
 
     // generateOTP(context, email, password);
 
-    if (userName.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Please enter valid Username...'),
-        duration: Duration(seconds: 3),
-      ));
-    } else if (userName.toLowerCase() == "demo" &&
-        password.toLowerCase() == "123456") {
-      mIsLoading = !mIsLoading;
-      notifyListeners();
-      Future.delayed(const Duration(seconds: 2), () {
-        mIsLoading = false;
-        notifyListeners();
-        navigator?.openHomeActivity();
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Invalid username or password...'),
-        duration: Duration(seconds: 3),
-      ));
-    }
+    // if (userName.isEmpty) {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text('Please enter valid Username...'),
+    //     duration: Duration(seconds: 3),
+    //   ));
+    // } else if (userName.toLowerCase() == "demo" &&
+    //     password.toLowerCase() == "123456") {
+    //   mIsLoading = !mIsLoading;
+    //   notifyListeners();
+    //   Future.delayed(const Duration(seconds: 2), () {
+    //     mIsLoading = false;
+    //     notifyListeners();
+    //     navigator?.openHomeActivity();
+    //   });
+    // } else {
+    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text('Invalid username or password...'),
+    //     duration: Duration(seconds: 3),
+    //   ));
+    // }
   }
 
   void generateOTP(BuildContext context, String phone_number, String otp) {
@@ -146,16 +146,16 @@ class vmLogin extends BaseViewModel<iLogin> {
         dataManager.setAccessToken(response.user!.authenticationToken!);
         dataManager
             .setCurrentUserLoggedInMode(LoggedInMode.LOGGED_IN_MODE_SERVER);
-        if (response.user!.userType!.toLowerCase() == "auction") {
-          dataManager.setCurrentUserLoggedInPlatform(
-              LoggedInPlatform.LOGGED_IN_PLATFORM_AUCTIONER);
-        } else {
-          dataManager.setCurrentUserLoggedInPlatform(
-              LoggedInPlatform.LOGGED_IN_PLATFORM_TRADER);
-        }
+        // if (response.user!.userType!.toLowerCase() == "auction") {
+        //   dataManager.setCurrentUserLoggedInPlatform(
+        //       LoggedInPlatform.LOGGED_IN_PLATFORM_AUCTIONER);
+        // } else {
+        //   dataManager.setCurrentUserLoggedInPlatform(
+        //       LoggedInPlatform.LOGGED_IN_PLATFORM_TRADER);
+        // }
         dataManager.setCurrentUserEmail(response.user!.email!);
         dataManager.setCurrentUserMobileNo(response.user?.phoneNumber);
-        dataManager.setCurrentUserRole(response.user?.userType);
+        dataManager.setCurrentUserRole(response.user?.role);
 
         navigator?.openHomeActivity();
       } else {

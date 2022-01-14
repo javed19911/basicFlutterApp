@@ -7,13 +7,21 @@ import 'custom_widgets/customText.dart';
 class Logo extends StatelessWidget {
   final Color? color;
   final double textSize;
-  const Logo({Key? key, this.color, this.textSize = 22}) : super(key: key);
+  final AlignmentGeometry alignment;
+  final EdgeInsetsGeometry? padding;
+  const Logo(
+      {Key? key,
+      this.color,
+      this.textSize = 22,
+      this.alignment = Alignment.center,
+      this.padding = const EdgeInsets.all(7)})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(7),
+      alignment: alignment,
+      padding: padding,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
